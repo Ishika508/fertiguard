@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light — clean slate with warm tint */
+    --background: 220 18% 97%;
+    --foreground: 222 30% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 30% 10%;
+
+    --primary: 152 60% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 94%;
+    --secondary-foreground: 222 20% 30%;
+
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 12% 52%;
+
+    --accent: 152 60% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 4 80% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 16% 90%;
+    --input: 220 16% 90%;
+    --ring: 152 60% 36%;
+
+    --success: 152 60% 36%;
+    --warning: 36 90% 48%;
+    --danger: 4 80% 56%;
+
+    --radius: 0.875rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1.25rem;
+  }
+
+  .dark {
+    /* Dark — deep navy, not pure black */
+    --background: 224 25% 8%;
+    --foreground: 220 16% 90%;
+
+    --card: 224 22% 11%;
+    --card-foreground: 220 16% 90%;
+
+    --popover: 224 22% 13%;
+    --popover-foreground: 220 16% 90%;
+
+    --primary: 152 58% 44%;
+    --primary-foreground: 224 25% 8%;
+
+    --secondary: 224 20% 16%;
+    --secondary-foreground: 220 14% 72%;
+
+    --muted: 224 20% 16%;
+    --muted-foreground: 220 12% 48%;
+
+    --accent: 152 58% 44%;
+    --accent-foreground: 224 25% 8%;
+
+    --destructive: 4 72% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 224 18% 18%;
+    --input: 224 18% 18%;
+    --ring: 152 58% 44%;
+
+    --success: 152 58% 44%;
+    --warning: 36 88% 54%;
+    --danger: 4 72% 52%;
+  }
+}
+
+@layer base {
+  * { @apply border-border box-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "cv02","cv03","cv04","cv11";
+  }
+  h1,h2,h3,h4,h5,h6 { font-family: 'Inter', system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+}
+
+@layer components {
+
+  /* ── Card styles ─────────────────────────────── */
+  .card-base {
+    @apply bg-card border border-border/70 rounded-2xl shadow-sm;
+  }
+  .card-glass {
+    @apply bg-white/70 dark:bg-card/80 backdrop-blur-md border border-border/60 rounded-2xl shadow-sm;
+  }
+  .card-inset {
+    @apply bg-muted/40 dark:bg-muted/20 border border-border/50 rounded-xl;
+  }
+
+  /* ── Sensor card color states ─────────────────── */
+  .sensor-green  { @apply bg-emerald-50/80 dark:bg-emerald-950/25 border-emerald-200/80 dark:border-emerald-800/40; }
+  .sensor-yellow { @apply bg-amber-50/80   dark:bg-amber-950/25   border-amber-200/80   dark:border-amber-800/40; }
+  .sensor-red    { @apply bg-red-50/80     dark:bg-red-950/25     border-red-200/80     dark:border-red-800/40; }
+
+  /* ── Status badges ────────────────────────────── */
+  .badge-active   { @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-700/40; }
+  .badge-warning  { @apply bg-amber-100   text-amber-800   dark:bg-amber-900/30   dark:text-amber-400   border border-amber-200/80   dark:border-amber-700/40; }
+  .badge-critical { @apply bg-red-100     text-red-800     dark:bg-red-900/30     dark:text-red-400     border border-red-200/80     dark:border-red-700/40; }
+
+  /* ── Pipe flow animations ─────────────────────── */
+  .pipe-flow {
+    background: linear-gradient(90deg, transparent 0%, rgba(52,211,153,.55) 25%, rgba(52,211,153,.9) 50%, rgba(52,211,153,.55) 75%, transparent 100%);
+    background-size: 200% 100%;
+    animation: flowMove 1.8s linear infinite;
+  }
+  .pipe-flow-slow {
+    background: linear-gradient(90deg, transparent 0%, rgba(251,191,36,.45) 25%, rgba(251,191,36,.75) 50%, rgba(251,191,36,.45) 75%, transparent 100%);
+    background-size: 200% 100%;
+    animation: flowMove 4.5s linear infinite;
+  }
+  .pipe-flow-clog {
+    background: linear-gradient(90deg, transparent 0%, rgba(248,113,113,.4) 25%, rgba(248,113,113,.65) 50%, rgba(248,113,113,.4) 75%, transparent 100%);
+    background-size: 200% 100%;
+    animation: flowMove 9s linear infinite;
+  }
+
+  /* ── Button styles ────────────────────────────── */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm transition-all duration-200 hover:opacity-90 active:scale-[.98] disabled:opacity-50 disabled:cursor-not-allowed shadow-sm;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-500 text-white font-semibold text-sm transition-all duration-200 hover:bg-red-600 active:scale-[.98] disabled:opacity-50 shadow-sm;
+  }
+  .btn-warning {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 text-white font-semibold text-sm transition-all duration-200 hover:bg-amber-600 active:scale-[.98] disabled:opacity-50 shadow-sm;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-transparent text-foreground font-semibold text-sm transition-all duration-200 hover:bg-muted active:scale-[.98];
+  }
+
+  /* ── Scrollbar ────────────────────────────────── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-border/80 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-muted-foreground/40; }
+}
+
+/* ── Keyframes ────────────────────────────────── */
+@keyframes flowMove {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pulseRed {
+  0%,100% { opacity: 1; }
+  50%      { opacity: .45; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0);   opacity: .6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(.7) translateY(8px); }
+  70%  { opacity: 1; transform: scale(1.05); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+/* ── Utility animation classes ───────────────── */
+.anim-fade-up    { animation: fadeUp      .4s ease both; }
+.anim-fade-in    { animation: fadeIn      .3s ease both; }
+.anim-scale-in   { animation: scaleIn     .35s ease both; }
+.anim-slide-right{ animation: slideInRight .3s ease both; }
+.anim-pulse-red  { animation: pulseRed    1s ease infinite; }
+.anim-pop-in     { animation: popIn       .4s cubic-bezier(.34,1.56,.64,1) both; }
+.chat-panel      { animation: slideInRight .3s ease both; }
+.count-anim      { animation: fadeUp .45s ease both; }
+
+/* ── Ripple effect on buttons ─────────────────── */
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255,255,255,.25);
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: none;
+}
+.ripple-btn:active::after {
+  animation: ripple .5s ease-out forwards;
+}
+
+/* ── Navbar glow border ───────────────────────── */
+.nav-border {
+  border-bottom: 1px solid hsl(var(--border) / .6);
+  box-shadow: 0 1px 0 0 hsl(var(--border) / .3);
+}
+
+/* ── Thin glowing card border ─────────────────── */
+.card-glow-green {
+  box-shadow: 0 0 0 1px hsl(152 60% 44% / .25), 0 2px 12px hsl(152 60% 44% / .08);
+}
+.card-glow-amber {
+  box-shadow: 0 0 0 1px hsl(36 88% 54% / .3),  0 2px 12px hsl(36 88% 54% / .1);
+}
+.card-glow-red {
+  box-shadow: 0 0 0 1px hsl(4 72% 52% / .35),   0 2px 12px hsl(4 72% 52% / .12);
+}
+
+/* shrinkBar used by ActionToast progress bar */
+@keyframes shrinkBar {
+  from { width: 100%; }
+  to   { width: 0%;   }
+}
